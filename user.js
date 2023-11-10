@@ -1,8 +1,9 @@
-// user.js
+// models/user.js
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
@@ -15,16 +16,13 @@ const userSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, 'Please enter a valid email address'],
   },
+  password: String, // Add password field for local strategy
   thoughts: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
-// Create a virtual for friendCount
-userSchema.virtual('friendCount').get(function () {
-  return this.friends.length;
-});
+UserSchema.plugin(passportLocalMongoose); // Adds username and password fields, and supports local strategy
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
+
 module.exports = User;
-
-
