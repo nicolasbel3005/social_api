@@ -6,7 +6,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User, Thought, Reaction } = require('../models');
 
-// ... (Other user routes)
+// ...
 
 // POST route for user registration
 router.post(
@@ -49,6 +49,6 @@ router.post('/login', passport.authenticate('local', { session: false }), (req, 
   }
 });
 
-// ... (Your other routes)
+// ...
 
 module.exports = router;

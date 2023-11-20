@@ -48,11 +48,11 @@ passport.use(
   )
 );
 
-// ... (Your other middleware and routes)
+// ... 
 
-// Example of a protected route using JWT
+// protected route using JWT
 app.get('/protected-route', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({ message: 'This route is protected.' });
 });
 
-// ... (Your other routes and server setup)
+// ... 
