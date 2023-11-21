@@ -67,4 +67,23 @@ async deleteThought(req, res) {
       console.log(error);
       res.status(500).json(error);
     }
-}
+}, 
+// update a thought
+async updateThought(req, res) {
+  try {
+    const updatedThought = await User.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    );
+
+    if (!updatedThought) {
+      return res.status(404).json({ message: 'No thought with ID given' });
+    }
+
+    return res.json(updatedThought);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+},
+};
