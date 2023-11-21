@@ -24,4 +24,23 @@ async getSingleThought(req, res) {
     console.error(err);
     return res.status(500).json(err);
   }
-}
+},
+ // create a new thought
+async createThought(req, res) {
+  try {
+    const { userId } = req.body;
+
+    const thought = await Thought.create(req.body);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $push: { thoughts: thought._id } },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}, 
+
