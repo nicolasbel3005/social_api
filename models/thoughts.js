@@ -50,3 +50,14 @@ reactions: [ReactionSchema]
   id: false, 
  }
 );
+
+//'reaction count
+ThoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
+
+//create thought model
+const Thought = mongoose.model('Thought', ThoughtSchema);
+
+
+module.exports = Thought;
