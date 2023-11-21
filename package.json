@@ -1,20 +1,6 @@
 {
-  "name": "social_api",
-  "version": "1.0.1",
-  "description": "mongoose project",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
-    "seed": "node utils/seed",
-    "heroku-postbuild": "node utils/seed.js"
-  },
   "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^7.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.9"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
   }
 }
