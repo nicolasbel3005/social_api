@@ -67,3 +67,29 @@ async deleteUser(req, res) {
         return res.status(500).json(err);
     }
 }, 
+// add friend
+async addFriend(req, res) {
+    try {
+      const user = await User.findById(req.params.userId);
+      user.friends.push(req.params.friendId);
+      await user.save();
+      res.status(200).send('Added Friend');
+    } catch (err) {
+      res.status(500).send(err);
+    }
+},
+async deleteFriend(req, res) {
+  try {
+    const { userId, friendId } = req.params;
+    const user = await User.findByIdAndUpdate(userId, { $pull: { friends: friendId } }, { new: true });
+    
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    
+    res.status(200).send('Removed Friend');
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+};
