@@ -43,4 +43,28 @@ async createThought(req, res) {
     res.status(500).json(err);
   }
 }, 
+// delete a thought & remove thought from the user
+async deleteThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
 
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought does not exist' });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { thoughts: req.params.thoughtId },
+        { $pull: { thoughts: req.params.thoughtId } },
+        { new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: 'Thought has been deleted but user was not found' });
+      }
+
+      res.json({ message: 'Thought has been deleted' });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+}
