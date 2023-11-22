@@ -7,19 +7,16 @@ const {
   updateThought
 } = require('../../controllers/ThoughtController');
 
-// Get all Thoughts
-router.route('/').get(getThoughts).get(getThoughts);
+// Get all Thoughts/ create thought
+router.route('/').get(getThoughts).post(createThought);
 
 // Get Single Thought
-router.route('/:thoughtId').get(getSingleThought).post(getSingleThought);
-
-// Create Thought
-router.route('/:thoughtId').get(createThought).post(createThought);
+router.route('/:thoughtId').post(getSingleThought);
 
 // Delete Thought
-router.route('/:thoughtId').get(deleteThought).delete(deleteThought);
+router.route('/:thoughtId').delete(deleteThought);
 
 // Update Thought
-router.route('/:thoughtId').get(updateThought).put(updateThought);
+router.route('/:thoughtId').put(updateThought);
 
 module.exports = router;
