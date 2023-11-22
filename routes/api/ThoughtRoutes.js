@@ -7,34 +7,19 @@ const {
   updateThought
 } = require('../../controllers/ThoughtController');
 
-// GET /api/thoughts
-router.route('/').get(getThoughts);
+// Get all Thoughts
+router.route('/').get(getThoughts).post(createThought);
 
-// POST /api/thoughts
-router.route('/').post(createThought);
+// Get Single Thought
+router.route('/:thoughtId').get(getSingleThought).post(getSingleThought);
 
-// GET /api/thoughts/:thoughtId
-router.route('/:thoughtId').get(getSingleThought);
+// Create Thought
+router.route('/:thoughtId').get(createThought).post(createThought);
 
-// POST /api/thoughts/:thoughtId
-router.route('/:thoughtId').post(getSingleThought);
+// Delete Thought
+router.route('/:thoughtId').get(deleteThought).delete(deleteThought);
 
-// GET /api/thoughts/:thoughtId/create
-router.route('/:thoughtId/create').get(createThought);
-
-// POST /api/thoughts/:thoughtId/create
-router.route('/:thoughtId/create').post(createThought);
-
-// GET /api/thoughts/:thoughtId/delete
-router.route('/:thoughtId/delete').get(deleteThought);
-
-// DELETE /api/thoughts/:thoughtId/delete
-router.route('/:thoughtId/delete').delete(deleteThought);
-
-// GET /api/thoughts/:thoughtId/update
-router.route('/:thoughtId/update').get(updateThought);
-
-// PUT /api/thoughts/:thoughtId/update
-router.route('/:thoughtId/update').put(updateThought);
+// Update Thought
+router.route('/:thoughtId').get(updateThought).put(updateThought);
 
 module.exports = router;
