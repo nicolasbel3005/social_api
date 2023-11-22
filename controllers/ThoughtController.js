@@ -52,7 +52,7 @@ async deleteThought(req, res) {
         return res.status(404).json({ message: 'Thought does not exist' });
       }
 
-      const user = await User.findOneAndUpdate(
+      const user = await Thought.findOneAndUpdate(
         { thoughts: req.params.thoughtId },
         { $pull: { thoughts: req.params.thoughtId } },
         { new: true }
@@ -71,7 +71,7 @@ async deleteThought(req, res) {
 // update a thought
 async updateThought(req, res) {
   try {
-    const updatedThought = await User.findOneAndUpdate(
+    const updatedThought = await Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
       { runValidators: true, new: true }
